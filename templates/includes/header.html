@@ -21,22 +21,21 @@
                         <li><a href="../../../{% current_lang request %}/{{ node.slug }}?cat_name={{ node.slug }}">{{ node.name }}</a>
                             {% if not node.is_leaf_node %}
                                 <ul class="sub-menu">
-
                                     <li>{{ children }}</li>
                                 </ul>
                             {% endif %}
                         </li>
                     {% endrecursetree %}
-                <li>
-                    <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
-                                <div class="search-box">
-                                    <form action="{% url 'project_search' %}">
-                                        <input type="text" placeholder="Search" name="keyword" required >
-                                        <button type="submit"><i class="fal
-                                                fa-search"></i></button>
-                                    </form>
-                                </div>
-                </li>
+                    <li>
+                        <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
+                        <div class="search-box">
+                            <form action="{% url 'project_search' %}">
+                                <input type="text" placeholder="Search" name="keyword" required >
+                                <button type="submit"><i class="fal
+                                        fa-search"></i></button>
+                            </form>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div class="header-right-elements d-flex align-items-center

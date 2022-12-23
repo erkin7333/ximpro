@@ -19,7 +19,7 @@ def tender(request):
 
 def tender_detail(request, slug):
     tender = Tender.objects.get(slug=slug)
-    all_tender = Tender.objects.all()
+    all_tender = Tender.objects.filter(translations__language_code=request.LANGUAGE_CODE)
     tender.view_count = tender.view_count + 1
     tender.save()
     context = {
@@ -30,7 +30,7 @@ def tender_detail(request, slug):
 
 
 def about(request):
-    about = About.objects.all()
+    about = About.objects.filter(translations__language_code=request.LANGUAGE_CODE)
 
     context = {
         'about': about,
@@ -39,7 +39,7 @@ def about(request):
 
 
 def projects(request):
-    projects = Projects.objects.filter(projects=True).order_by('order')
+    projects = Projects.objects.filter(translations__language_code=request.LANGUAGE_CODE, projects=True).order_by('order')
     context = {
         'projects': projects,
         'set': set,
@@ -48,7 +48,7 @@ def projects(request):
 
 
 def completed_job(request):
-    projects = Projects.objects.filter(completed_job=True).order_by('order')
+    projects = Projects.objects.filter(translations__language_code=request.LANGUAGE_CODE, completed_job=True).order_by('order')
     context = {
         'projects': projects,
         'set': set,
@@ -57,7 +57,7 @@ def completed_job(request):
 
 
 def new_developments(request):
-    projects = Projects.objects.filter(new_developments=True).order_by('order')
+    projects = Projects.objects.filter(translations__language_code=request.LANGUAGE_CODE, new_developments=True).order_by('order')
     context = {
         'projects': projects,
         'set': set,
@@ -66,7 +66,7 @@ def new_developments(request):
 
 
 def know_how(request):
-    projects = Projects.objects.filter(know_how=True).order_by('order')
+    projects = Projects.objects.filter(translations__language_code=request.LANGUAGE_CODE, know_how=True).order_by('order')
     context = {
         'projects': projects,
         'set': set,
@@ -100,7 +100,7 @@ def events(request):
 
 def news_detail(request, slug):
     news = News.objects.get(slug=slug)
-    popular_news = News.objects.all().order_by('-order')[:4]
+    popular_news = News.objects.filter(translations__language_code=request.LANGUAGE_CODE).order_by('-order')[:4]
     context = {
         'news': news,
         'popular_news': popular_news,
@@ -109,7 +109,7 @@ def news_detail(request, slug):
 
 
 def membership(request):
-    membership = Membership.objects.all()
+    membership = Membership.objects.filter(translations__language_code=request.LANGUAGE_CODE)
     context = {
         'membership': membership,
     }
@@ -117,7 +117,7 @@ def membership(request):
 
 
 def membership_page(request, slug):
-    membership = Membership.objects.get(slug=slug)
+    membership = Membership.objects.get(slug=slug).filter(translations__language_code=request.LANGUAGE_CODE)
     context = {
         'membership': membership,
     }
@@ -125,7 +125,7 @@ def membership_page(request, slug):
 
 
 def production(request):
-    production = Projects.objects.filter(production=True)
+    production = Projects.objects.filter(translations__language_code=request.LANGUAGE_CODE, production=True)
     context = {
         'production': production,
     }
@@ -160,7 +160,7 @@ def contact(request):
 
 
 def tables(request):
-    table = Tables.objects.all()
+    table = Tables.objects.filter(translations__language_code=request.LANGUAGE_CODE)
     context = {
         'table': table,
     }
@@ -171,9 +171,9 @@ def tables(request):
 def static_content(request, slug):
     param = request.GET.get('cat_name')
     try:
-        category = Category.objects.get(slug=param)
+        category = Category.objects.get(slug=param).filter(translations__language_code=request.LANGUAGE_CODE)
         if category.parent is not None:
-            static_all = Category.objects.filter(parent=category.parent)
+            static_all = Category.objects.filter(translations__language_code=request.LANGUAGE_CODE, parent=category.parent)
         else:
             static_all = category.get_children()
     except:
@@ -269,7 +269,7 @@ def thanks(request):
 
 
 def category(request):
-    cat = Category.objects.all()
+    cat = Category.objects.filter(translations__language_code=request.LANGUAGE_CODE)
     context = {
         'cat': cat,
     }

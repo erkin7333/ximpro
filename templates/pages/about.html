@@ -45,7 +45,7 @@
                             <span>{% trans 'О компании' %}</span>
                             <h2>{{ item.title }}</h2>
                         </div>
-                        <blockquote>{{ item.short_description }}</blockquote>
+                        <blockquote aria-colspan="{{ item.short_description }}">{{ item.short_description }}</blockquote>
                     </div>
 
                     <p>{{ item.description|safe }}</p>

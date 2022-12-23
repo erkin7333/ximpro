@@ -194,9 +194,11 @@ body {
   font-weight: 400;
   line-height: 28px;
   color: #53545A;
-  background-color: #fff;
+  background-color: #000;
 }
-
+.erkin {
+    color: #000;
+}
 h1,
 h2,
 h3,
